@@ -1,12 +1,10 @@
 # Laravel MySQL Spatial extension
 
-[![Build Status](https://img.shields.io/travis/fleetbase/laravel-mysql-spatial.svg?style=flat-square)](https://travis-ci.org/fleetbase/laravel-mysql-spatial)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability/fleetbase/laravel-mysql-spatial.svg?style=flat-square)](https://codeclimate.com/github/fleetbase/laravel-mysql-spatial/maintainability)
-[![Code Climate](https://img.shields.io/codeclimate/c/fleetbase/laravel-mysql-spatial.svg?style=flat-square&colorB=4BCA2A)](https://codeclimate.com/github/fleetbase/laravel-mysql-spatial/test_coverage) [![Packagist](https://img.shields.io/packagist/v/fleetbase/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/fleetbase/laravel-mysql-spatial)
-[![Packagist](https://img.shields.io/packagist/dt/fleetbase/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/fleetbase/laravel-mysql-spatial) [![StyleCI](https://github.styleci.io/repos/83766141/shield?branch=master)](https://github.styleci.io/repos/83766141) 
+[![Packagist](https://img.shields.io/packagist/v/fleetbase/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/fleetbase/laravel-mysql-spatial)
+[![Packagist](https://img.shields.io/packagist/dt/fleetbase/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/fleetbase/laravel-mysql-spatial) 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE)
 
-Laravel package to easily work with [MySQL Spatial Data Types](https://dev.mysql.com/doc/refman/8.0/en/spatial-type-overview.html) and [MySQL Spatial Functions](https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html). This is a maintained fork from the infamous [fleetbase/laravel-mysql-spatial][https://github.com/fleetbase/laravel-mysql-spatial] for Laravel 9x and 10x.
+Laravel package to easily work with [MySQL Spatial Data Types](https://dev.mysql.com/doc/refman/8.0/en/spatial-type-overview.html) and [MySQL Spatial Functions](https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html). This is a maintained fork from the infamous [grimzy\/laravel-mysql-spatial](https://github.com/grimzy/laravel-mysql-spatial) for Laravel 9x and 10x.
 
 Please check the documentation for your MySQL version. MySQL's Extension for Spatial Data was added in MySQL 5.5 but many Spatial Functions were changed in 5.6 and 5.7.
 
