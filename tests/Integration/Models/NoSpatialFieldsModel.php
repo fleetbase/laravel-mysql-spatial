@@ -1,12 +1,12 @@
 <?php
 
-use Fleetbase\Database\Spatial\Eloquent\SpatialTrait;
+use Fleetbase\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class NoSpatialFieldsModel.
  *
- * @property \Fleetbase\Database\Spatial\Types\Geometry geometry
+ * @property \Fleetbase\LaravelMysqlSpatial\Types\Geometry geometry
  */
 class NoSpatialFieldsModel extends Model
 {

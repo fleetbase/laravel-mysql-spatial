@@ -1,11 +1,11 @@
 <?php
 
-use Fleetbase\Database\Spatial\Types\GeometryCollection;
-use Fleetbase\Database\Spatial\Types\LineString;
-use Fleetbase\Database\Spatial\Types\MultiPoint;
-use Fleetbase\Database\Spatial\Types\MultiPolygon;
-use Fleetbase\Database\Spatial\Types\Point;
-use Fleetbase\Database\Spatial\Types\Polygon;
+use Fleetbase\LaravelMysqlSpatial\Types\GeometryCollection;
+use Fleetbase\LaravelMysqlSpatial\Types\LineString;
+use Fleetbase\LaravelMysqlSpatial\Types\MultiPoint;
+use Fleetbase\LaravelMysqlSpatial\Types\MultiPolygon;
+use Fleetbase\LaravelMysqlSpatial\Types\Point;
+use Fleetbase\LaravelMysqlSpatial\Types\Polygon;
 
 class SridSpatialTest extends IntegrationBaseTestCase
 {

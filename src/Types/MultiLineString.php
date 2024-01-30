@@ -1,10 +1,10 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Types;
+namespace Fleetbase\LaravelMysqlSpatial\Types;
 
 use GeoJson\GeoJson;
 use GeoJson\Geometry\MultiLineString as GeoJsonMultiLineString;
-use Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class MultiLineString extends GeometryCollection
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Doctrine;
+namespace Fleetbase\LaravelMysqlSpatial\Doctrine;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;

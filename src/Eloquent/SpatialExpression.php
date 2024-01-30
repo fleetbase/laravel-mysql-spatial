@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Eloquent;
+namespace Fleetbase\LaravelMysqlSpatial\Eloquent;
 
 use Illuminate\Database\Query\Expression;
 

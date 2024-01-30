@@ -28,14 +28,14 @@ From the command line:
 php artisan make:migration create_places_table
 ```
 
-Then edit the migration you just created by adding at least one spatial data field. For Laravel versions prior to 5.5, you can use the Blueprint provided by this package (Fleetbase\Database\Spatial\Schema\Blueprint):
+Then edit the migration you just created by adding at least one spatial data field. For Laravel versions prior to 5.5, you can use the Blueprint provided by this package (Fleetbase\LaravelMysqlSpatial\Schema\Blueprint):
 
 ```php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 // For Laravel < 5.5
-// use Fleetbase\Database\Spatial\Schema\Blueprint;
+// use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
 
 class CreatePlacesTable extends Migration {
 
@@ -103,11 +103,11 @@ Then edit the model you just created. It must use the `SpatialTrait` and define 
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Fleetbase\Database\Spatial\Eloquent\SpatialTrait;
+use Fleetbase\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 
 /**
- * @property \Fleetbase\Database\Spatial\Types\Point   $location
- * @property \Fleetbase\Database\Spatial\Types\Polygon $area
+ * @property \Fleetbase\LaravelMysqlSpatial\Types\Point   $location
+ * @property \Fleetbase\LaravelMysqlSpatial\Types\Polygon $area
  */
 class Place extends Model
 {
@@ -127,9 +127,9 @@ class Place extends Model
 ### Saving a model
 
 ```php
-use Fleetbase\Database\Spatial\Types\Point;
-use Fleetbase\Database\Spatial\Types\Polygon;
-use Fleetbase\Database\Spatial\Types\LineString;
+use Fleetbase\LaravelMysqlSpatial\Types\Point;
+use Fleetbase\LaravelMysqlSpatial\Types\Polygon;
+use Fleetbase\LaravelMysqlSpatial\Types\LineString;
 
 $place1 = new Place();
 $place1->name = 'Empire State Building';
@@ -152,9 +152,9 @@ $place1->save();
 Or if your database fields were created with a specific SRID:
 
 ```php
-use Fleetbase\Database\Spatial\Types\Point;
-use Fleetbase\Database\Spatial\Types\Polygon;
-use Fleetbase\Database\Spatial\Types\LineString;
+use Fleetbase\LaravelMysqlSpatial\Types\Point;
+use Fleetbase\LaravelMysqlSpatial\Types\Polygon;
+use Fleetbase\LaravelMysqlSpatial\Types\LineString;
 
 $place1 = new Place();
 $place1->name = 'Empire State Building';
@@ -190,7 +190,7 @@ $lng = $place2->location->getLng();	// -73.9878441
 
 ### Available Geometry classes
 
-| Fleetbase\Database\Spatial\Types                             | OpenGIS Class                                                |
+| Fleetbase\LaravelMysqlSpatial\Types                             | OpenGIS Class                                                |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `Point($lat, $lng, $srid = 0)`                               | [Point](https://dev.mysql.com/doc/refman/8.0/en/gis-class-point.html) |
 | `MultiPoint(Point[], $srid = 0)`                             | [MultiPoint](https://dev.mysql.com/doc/refman/8.0/en/gis-class-multipoint.html) |
@@ -204,7 +204,7 @@ Check out the [Class diagram](https://user-images.githubusercontent.com/1837678/
 
 ### Using Geometry classes
 
-In order for your Eloquent Model to handle the Geometry classes, it must use the `Fleetbase\Database\Spatial\Eloquent\SpatialTrait` trait and define a `protected` property `$spatialFields`  as an array of MySQL Spatial Data Type column names (example in [Quickstart](#user-content-create-a-model)).
+In order for your Eloquent Model to handle the Geometry classes, it must use the `Fleetbase\LaravelMysqlSpatial\Eloquent\SpatialTrait` trait and define a `protected` property `$spatialFields`  as an array of MySQL Spatial Data Type column names (example in [Quickstart](#user-content-create-a-model)).
 
 #### IteratorAggregate and ArrayAccess
 
@@ -302,11 +302,11 @@ Available scopes:
 
 ## Migrations
 
-For Laravel versions prior to 5.5, you can use the Blueprint provided with this package: `Fleetbase\Database\Spatial\Schema\Blueprint`.
+For Laravel versions prior to 5.5, you can use the Blueprint provided with this package: `Fleetbase\LaravelMysqlSpatial\Schema\Blueprint`.
 
 ```php
 use Illuminate\Database\Migrations\Migration;
-use Fleetbase\Database\Spatial\Schema\Blueprint;
+use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
 
 class CreatePlacesTable extends Migration {
     // ...

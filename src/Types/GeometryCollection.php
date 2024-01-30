@@ -1,13 +1,13 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Types;
+namespace Fleetbase\LaravelMysqlSpatial\Types;
 
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use GeoJson\Feature\FeatureCollection;
 use GeoJson\GeoJson;
-use Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use Illuminate\Contracts\Support\Arrayable;
 use InvalidArgumentException;
 use IteratorAggregate;

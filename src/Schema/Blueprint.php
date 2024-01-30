@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Schema;
+namespace Fleetbase\LaravelMysqlSpatial\Schema;
 
 use Illuminate\Database\Schema\Blueprint as IlluminateBlueprint;
 

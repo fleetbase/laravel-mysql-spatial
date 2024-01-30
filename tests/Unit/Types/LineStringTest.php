@@ -1,7 +1,7 @@
 <?php
 
-use Fleetbase\Database\Spatial\Types\LineString;
-use Fleetbase\Database\Spatial\Types\Point;
+use Fleetbase\LaravelMysqlSpatial\Types\LineString;
+use Fleetbase\LaravelMysqlSpatial\Types\Point;
 
 class LineStringTest extends BaseTestCase
 {
@@ -46,7 +46,7 @@ class LineStringTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException::class,
+            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
             sprintf('Expected %s, got %s', \GeoJson\Geometry\LineString::class, GeoJson\Geometry\Point::class)
         );
         LineString::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');

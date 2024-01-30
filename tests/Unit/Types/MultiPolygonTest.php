@@ -1,9 +1,9 @@
 <?php
 
-use Fleetbase\Database\Spatial\Types\LineString;
-use Fleetbase\Database\Spatial\Types\MultiPolygon;
-use Fleetbase\Database\Spatial\Types\Point;
-use Fleetbase\Database\Spatial\Types\Polygon;
+use Fleetbase\LaravelMysqlSpatial\Types\LineString;
+use Fleetbase\LaravelMysqlSpatial\Types\MultiPolygon;
+use Fleetbase\LaravelMysqlSpatial\Types\Point;
+use Fleetbase\LaravelMysqlSpatial\Types\Polygon;
 
 class MultiPolygonTest extends BaseTestCase
 {
@@ -66,7 +66,7 @@ class MultiPolygonTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException::class,
+            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
             sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPolygon::class, GeoJson\Geometry\Point::class)
         );
         MultiPolygon::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
@@ -82,7 +82,7 @@ class MultiPolygonTest extends BaseTestCase
     {
         $this->assertException(
             InvalidArgumentException::class,
-            'Fleetbase\Database\Spatial\Types\MultiPolygon must contain at least 1 entry'
+            'Fleetbase\LaravelMysqlSpatial\Types\MultiPolygon must contain at least 1 entry'
         );
         $multipolygon = new MultiPolygon([]);
     }
@@ -91,7 +91,7 @@ class MultiPolygonTest extends BaseTestCase
     {
         $this->assertException(
             InvalidArgumentException::class,
-            'Fleetbase\Database\Spatial\Types\MultiPolygon must be a collection of Fleetbase\Database\Spatial\Types\Polygon'
+            'Fleetbase\LaravelMysqlSpatial\Types\MultiPolygon must be a collection of Fleetbase\LaravelMysqlSpatial\Types\Polygon'
         );
         $multipolygon = new MultiPolygon([
             $this->getPolygon1(),
@@ -118,7 +118,7 @@ class MultiPolygonTest extends BaseTestCase
         // assert invalid
         $this->assertException(
             InvalidArgumentException::class,
-            'Fleetbase\Database\Spatial\Types\MultiPolygon must be a collection of Fleetbase\Database\Spatial\Types\Polygon'
+            'Fleetbase\LaravelMysqlSpatial\Types\MultiPolygon must be a collection of Fleetbase\LaravelMysqlSpatial\Types\Polygon'
         );
         $multipolygon[] = 1;
     }

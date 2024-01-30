@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Types;
+namespace Fleetbase\LaravelMysqlSpatial\Types;
 
 interface GeometryInterface
 {

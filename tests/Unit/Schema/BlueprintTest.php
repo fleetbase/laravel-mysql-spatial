@@ -3,14 +3,14 @@
 namespace Schema;
 
 use BaseTestCase;
-use Fleetbase\Database\Spatial\Schema\Blueprint;
+use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
 use Illuminate\Database\Schema\ColumnDefinition;
 use Mockery;
 
 class BlueprintTest extends BaseTestCase
 {
     /**
-     * @var \Fleetbase\Database\Spatial\Schema\Blueprint
+     * @var \Fleetbase\LaravelMysqlSpatial\Schema\Blueprint
      */
     protected $blueprint;
 

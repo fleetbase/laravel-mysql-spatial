@@ -1,10 +1,10 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Types;
+namespace Fleetbase\LaravelMysqlSpatial\Types;
 
 use GeoIO\WKB\Parser\Parser;
 use GeoJson\GeoJson;
-use Fleetbase\Database\Spatial\Exceptions\UnknownWKTTypeException;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownWKTTypeException;
 use Illuminate\Contracts\Support\Jsonable;
 
 abstract class Geometry implements GeometryInterface, Jsonable, \JsonSerializable
@@ -108,7 +108,7 @@ abstract class Geometry implements GeometryInterface, Jsonable, \JsonSerializabl
             $geoJson = $geoJson->getGeometry();
         }
 
-        $type = '\Fleetbase\Database\Spatial\Types\\'.$geoJson->getType();
+        $type = '\Fleetbase\LaravelMysqlSpatial\Types\\'.$geoJson->getType();
 
         return $type::fromJson($geoJson);
     }

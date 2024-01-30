@@ -1,10 +1,10 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Types;
+namespace Fleetbase\LaravelMysqlSpatial\Types;
 
 use GeoJson\GeoJson;
 use GeoJson\Geometry\MultiPoint as GeoJsonMultiPoint;
-use Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class MultiPoint extends PointCollection
 {

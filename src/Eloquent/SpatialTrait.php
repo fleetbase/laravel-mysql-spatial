@@ -1,12 +1,12 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Eloquent;
+namespace Fleetbase\LaravelMysqlSpatial\Eloquent;
 
-use Fleetbase\Database\Spatial\Exceptions\SpatialFieldsNotDefinedException;
-use Fleetbase\Database\Spatial\Exceptions\UnknownSpatialFunctionException;
-use Fleetbase\Database\Spatial\Exceptions\UnknownSpatialRelationFunction;
-use Fleetbase\Database\Spatial\Types\Geometry;
-use Fleetbase\Database\Spatial\Types\GeometryInterface;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownSpatialFunctionException;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownSpatialRelationFunction;
+use Fleetbase\LaravelMysqlSpatial\Types\Geometry;
+use Fleetbase\LaravelMysqlSpatial\Types\GeometryInterface;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 /**
@@ -63,7 +63,7 @@ trait SpatialTrait
      *
      * @param \Illuminate\Database\Query\Builder $query
      *
-     * @return \Fleetbase\Database\Spatial\Eloquent\Builder
+     * @return \Fleetbase\LaravelMysqlSpatial\Eloquent\Builder
      */
     public function newEloquentBuilder($query)
     {

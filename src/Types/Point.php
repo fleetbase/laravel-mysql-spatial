@@ -1,10 +1,10 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Types;
+namespace Fleetbase\LaravelMysqlSpatial\Types;
 
 use GeoJson\GeoJson;
 use GeoJson\Geometry\Point as GeoJsonPoint;
-use Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class Point extends Geometry
 {
@@ -70,7 +70,7 @@ class Point extends Geometry
     /**
      * @param $geoJson  \GeoJson\Feature\Feature|string
      *
-     * @return \Fleetbase\Database\Spatial\Types\Point
+     * @return \Fleetbase\LaravelMysqlSpatial\Types\Point
      */
     public static function fromJson($geoJson)
     {

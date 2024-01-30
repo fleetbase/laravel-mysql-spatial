@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\Database\Spatial\Exceptions;
+namespace Fleetbase\LaravelMysqlSpatial\Exceptions;
 
 class InvalidGeoJsonException extends \RuntimeException
 {

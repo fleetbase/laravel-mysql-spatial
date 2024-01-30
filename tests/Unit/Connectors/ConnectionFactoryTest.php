@@ -1,7 +1,7 @@
 <?php
 
-use Fleetbase\Database\Spatial\Connectors\ConnectionFactory;
-use Fleetbase\Database\Spatial\MysqlConnection;
+use Fleetbase\LaravelMysqlSpatial\Connectors\ConnectionFactory;
+use Fleetbase\LaravelMysqlSpatial\MysqlConnection;
 use Illuminate\Container\Container;
 use Stubs\PDOStub;
 
