@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\Database\Spatial;
+namespace Fleetbase\LaravelMysqlSpatial;
 
 use Doctrine\DBAL\Types\Type as DoctrineType;
 use Fleetbase\LaravelMysqlSpatial\Schema\Builder;
