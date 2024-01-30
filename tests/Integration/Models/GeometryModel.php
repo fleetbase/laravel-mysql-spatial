@@ -1,15 +1,15 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Fleetbase\Database\Spatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class GeometryModel.
  *
  * @property int                                          id
- * @property \Fleetbase\LaravelMysqlSpatial\Types\Point      location
- * @property \Fleetbase\LaravelMysqlSpatial\Types\LineString line
- * @property \Fleetbase\LaravelMysqlSpatial\Types\LineString shape
+ * @property \Fleetbase\Database\Spatial\Types\Point      location
+ * @property \Fleetbase\Database\Spatial\Types\LineString line
+ * @property \Fleetbase\Database\Spatial\Types\LineString shape
  */
 class GeometryModel extends Model
 {

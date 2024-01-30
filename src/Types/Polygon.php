@@ -1,10 +1,10 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial\Types;
+namespace Fleetbase\Database\Spatial\Types;
 
 use GeoJson\GeoJson;
 use GeoJson\Geometry\Polygon as GeoJsonPolygon;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
+use Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException;
 
 class Polygon extends MultiLineString
 {

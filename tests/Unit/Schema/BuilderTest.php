@@ -3,9 +3,9 @@
 namespace Schema;
 
 use BaseTestCase;
-use Fleetbase\LaravelMysqlSpatial\MysqlConnection;
-use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
-use Fleetbase\LaravelMysqlSpatial\Schema\Builder;
+use Fleetbase\Database\Spatial\MysqlConnection;
+use Fleetbase\Database\Spatial\Schema\Blueprint;
+use Fleetbase\Database\Spatial\Schema\Builder;
 use Mockery;
 
 class BuilderTest extends BaseTestCase

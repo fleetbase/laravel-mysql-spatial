@@ -1,6 +1,7 @@
 {
     "name": "fleetbase/laravel-mysql-spatial",
     "description": "MySQL spatial data types extension for Laravel x Fleetbase.",
+    "version": "1.0.0",
     "scripts": {
         "test": "phpunit -c phpunit.xml.dist",
         "test:unit": "phpunit -c phpunit.xml.dist --testsuite unit",
@@ -35,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Fleetbase\\LaravelMysqlSpatial\\": "src/"
+            "Fleetbase\\Database\\Spatial\\": "src/"
         }
     },
     "autoload-dev" : {
@@ -47,7 +48,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fleetbase\\LaravelMysqlSpatial\\SpatialServiceProvider"
+                "Fleetbase\\Database\\Spatial\\SpatialServiceProvider"
             ]
         }
     }

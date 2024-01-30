@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial\Eloquent;
+namespace Fleetbase\Database\Spatial\Eloquent;
 
 use Illuminate\Database\Query\Builder as QueryBuilder;
 

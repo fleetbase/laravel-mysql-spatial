@@ -1,8 +1,8 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial\Eloquent;
+namespace Fleetbase\Database\Spatial\Eloquent;
 
-use Fleetbase\LaravelMysqlSpatial\Types\GeometryInterface;
+use Fleetbase\Database\Spatial\Types\GeometryInterface;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class Builder extends EloquentBuilder

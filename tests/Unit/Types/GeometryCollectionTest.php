@@ -1,10 +1,10 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\Types\GeometryCollection;
-use Fleetbase\LaravelMysqlSpatial\Types\GeometryInterface;
-use Fleetbase\LaravelMysqlSpatial\Types\LineString;
-use Fleetbase\LaravelMysqlSpatial\Types\Point;
-use Fleetbase\LaravelMysqlSpatial\Types\Polygon;
+use Fleetbase\Database\Spatial\Types\GeometryCollection;
+use Fleetbase\Database\Spatial\Types\GeometryInterface;
+use Fleetbase\Database\Spatial\Types\LineString;
+use Fleetbase\Database\Spatial\Types\Point;
+use Fleetbase\Database\Spatial\Types\Polygon;
 
 class GeometryCollectionTest extends BaseTestCase
 {
@@ -59,7 +59,7 @@ class GeometryCollectionTest extends BaseTestCase
     {
         $this->assertException(
             InvalidArgumentException::class,
-            'Fleetbase\LaravelMysqlSpatial\Types\GeometryCollection must be a collection of Fleetbase\LaravelMysqlSpatial\Types\GeometryInterface'
+            'Fleetbase\Database\Spatial\Types\GeometryCollection must be a collection of Fleetbase\Database\Spatial\Types\GeometryInterface'
         );
         $geometrycollection = new GeometryCollection([
             $this->getPoint(),
@@ -112,7 +112,7 @@ class GeometryCollectionTest extends BaseTestCase
         // assert invalid
         $this->assertException(
             InvalidArgumentException::class,
-            'Fleetbase\LaravelMysqlSpatial\Types\GeometryCollection must be a collection of Fleetbase\LaravelMysqlSpatial\Types\GeometryInterface'
+            'Fleetbase\Database\Spatial\Types\GeometryCollection must be a collection of Fleetbase\Database\Spatial\Types\GeometryInterface'
         );
         $geometryCollection[] = 1;
     }
@@ -130,7 +130,7 @@ class GeometryCollectionTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            \Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException::class,
             sprintf('Expected %s, got %s', GeoJson\Feature\FeatureCollection::class, GeoJson\Geometry\Point::class)
         );
         GeometryCollection::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');

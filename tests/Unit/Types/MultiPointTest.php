@@ -1,7 +1,7 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\Types\MultiPoint;
-use Fleetbase\LaravelMysqlSpatial\Types\Point;
+use Fleetbase\Database\Spatial\Types\MultiPoint;
+use Fleetbase\Database\Spatial\Types\Point;
 
 class MultiPointTest extends BaseTestCase
 {
@@ -43,7 +43,7 @@ class MultiPointTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            \Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException::class,
             sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPoint::class, GeoJson\Geometry\Point::class)
         );
         MultiPoint::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
@@ -63,7 +63,7 @@ class MultiPointTest extends BaseTestCase
     {
         $this->assertException(
             InvalidArgumentException::class,
-            'Fleetbase\LaravelMysqlSpatial\Types\MultiPoint must contain at least 1 entry'
+            'Fleetbase\Database\Spatial\Types\MultiPoint must contain at least 1 entry'
         );
         $multipoint = new MultiPoint([]);
     }
@@ -72,7 +72,7 @@ class MultiPointTest extends BaseTestCase
     {
         $this->assertException(
             InvalidArgumentException::class,
-            'Fleetbase\LaravelMysqlSpatial\Types\MultiPoint must be a collection of Fleetbase\LaravelMysqlSpatial\Types\Point'
+            'Fleetbase\Database\Spatial\Types\MultiPoint must be a collection of Fleetbase\Database\Spatial\Types\Point'
         );
         $multipoint = new MultiPoint([
             new Point(0, 0),
@@ -98,7 +98,7 @@ class MultiPointTest extends BaseTestCase
         // assert invalid
         $this->assertException(
             InvalidArgumentException::class,
-            'Fleetbase\LaravelMysqlSpatial\Types\MultiPoint must be a collection of Fleetbase\LaravelMysqlSpatial\Types\Point'
+            'Fleetbase\Database\Spatial\Types\MultiPoint must be a collection of Fleetbase\Database\Spatial\Types\Point'
         );
         $multipoint[] = 1;
     }

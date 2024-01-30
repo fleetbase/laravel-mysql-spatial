@@ -1,11 +1,11 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\Types\GeometryCollection;
-use Fleetbase\LaravelMysqlSpatial\Types\LineString;
-use Fleetbase\LaravelMysqlSpatial\Types\MultiPoint;
-use Fleetbase\LaravelMysqlSpatial\Types\MultiPolygon;
-use Fleetbase\LaravelMysqlSpatial\Types\Point;
-use Fleetbase\LaravelMysqlSpatial\Types\Polygon;
+use Fleetbase\Database\Spatial\Types\GeometryCollection;
+use Fleetbase\Database\Spatial\Types\LineString;
+use Fleetbase\Database\Spatial\Types\MultiPoint;
+use Fleetbase\Database\Spatial\Types\MultiPolygon;
+use Fleetbase\Database\Spatial\Types\Point;
+use Fleetbase\Database\Spatial\Types\Polygon;
 
 class SpatialTest extends IntegrationBaseTestCase
 {
@@ -20,7 +20,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $geo->geometry = new Point(1, 2);
         $geo->save();
 
-        $this->assertException(\Fleetbase\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException::class);
+        $this->assertException(\Fleetbase\Database\Spatial\Exceptions\SpatialFieldsNotDefinedException::class);
         NoSpatialFieldsModel::all();
     }
 
@@ -241,7 +241,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $loc = new GeometryModel();
         $loc->location = new Point(1, 1);
 
-        $this->assertException(\Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownSpatialFunctionException::class);
+        $this->assertException(\Fleetbase\Database\Spatial\Exceptions\UnknownSpatialFunctionException::class);
         GeometryModel::orderBySpatial('location', $loc->location, 'does-not-exist')->get();
     }
 
@@ -315,9 +315,9 @@ class SpatialTest extends IntegrationBaseTestCase
     //public function testBounding() {
     //    $point = new Point(0, 0);
     //
-    //    $linestring1 = \Fleetbase\LaravelMysqlSpatial\Types\LineString::fromWkt("LINESTRING(1 1, 2 2)");
-    //    $linestring2 = \Fleetbase\LaravelMysqlSpatial\Types\LineString::fromWkt("LINESTRING(20 20, 24 24)");
-    //    $linestring3 = \Fleetbase\LaravelMysqlSpatial\Types\LineString::fromWkt("LINESTRING(0 10, 10 10)");
+    //    $linestring1 = \Fleetbase\Database\Spatial\Types\LineString::fromWkt("LINESTRING(1 1, 2 2)");
+    //    $linestring2 = \Fleetbase\Database\Spatial\Types\LineString::fromWkt("LINESTRING(20 20, 24 24)");
+    //    $linestring3 = \Fleetbase\Database\Spatial\Types\LineString::fromWkt("LINESTRING(0 10, 10 10)");
     //
     //    $geo1 = new GeometryModel();
     //    $geo1->location = $point;

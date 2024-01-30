@@ -1,6 +1,6 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\SpatialServiceProvider;
+use Fleetbase\Database\Spatial\SpatialServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 

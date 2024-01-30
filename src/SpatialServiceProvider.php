@@ -1,17 +1,17 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial;
+namespace Fleetbase\Database\Spatial;
 
 use Doctrine\DBAL\Types\Type as DoctrineType;
-use Fleetbase\LaravelMysqlSpatial\Connectors\ConnectionFactory;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\Geometry;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\GeometryCollection;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\LineString;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\MultiLineString;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\MultiPoint;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\MultiPolygon;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\Point;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\Polygon;
+use Fleetbase\Database\Spatial\Connectors\ConnectionFactory;
+use Fleetbase\Database\Spatial\Doctrine\Geometry;
+use Fleetbase\Database\Spatial\Doctrine\GeometryCollection;
+use Fleetbase\Database\Spatial\Doctrine\LineString;
+use Fleetbase\Database\Spatial\Doctrine\MultiLineString;
+use Fleetbase\Database\Spatial\Doctrine\MultiPoint;
+use Fleetbase\Database\Spatial\Doctrine\MultiPolygon;
+use Fleetbase\Database\Spatial\Doctrine\Point;
+use Fleetbase\Database\Spatial\Doctrine\Polygon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\DatabaseServiceProvider;
 

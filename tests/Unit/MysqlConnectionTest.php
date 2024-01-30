@@ -1,7 +1,7 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\MysqlConnection;
-use Fleetbase\LaravelMysqlSpatial\Schema\Builder;
+use Fleetbase\Database\Spatial\MysqlConnection;
+use Fleetbase\Database\Spatial\Schema\Builder;
 use PHPUnit\Framework\TestCase;
 use Stubs\PDOStub;
 

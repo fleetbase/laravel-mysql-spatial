@@ -1,8 +1,8 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial\Connectors;
+namespace Fleetbase\Database\Spatial\Connectors;
 
-use Fleetbase\LaravelMysqlSpatial\MysqlConnection;
+use Fleetbase\Database\Spatial\MysqlConnection;
 use Illuminate\Database\Connectors\ConnectionFactory as IlluminateConnectionFactory;
 use PDO;
 

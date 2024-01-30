@@ -1,8 +1,8 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\MysqlConnection;
-use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
-use Fleetbase\LaravelMysqlSpatial\Schema\Grammars\MySqlGrammar;
+use Fleetbase\Database\Spatial\MysqlConnection;
+use Fleetbase\Database\Spatial\Schema\Blueprint;
+use Fleetbase\Database\Spatial\Schema\Grammars\MySqlGrammar;
 
 class MySqlGrammarBaseTest extends BaseTestCase
 {

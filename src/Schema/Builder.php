@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial\Schema;
+namespace Fleetbase\Database\Spatial\Schema;
 
 use Closure;
 use Illuminate\Database\Schema\MySqlBuilder;

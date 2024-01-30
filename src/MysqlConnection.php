@@ -1,10 +1,10 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial;
+namespace Fleetbase\Database\Spatial;
 
 use Doctrine\DBAL\Types\Type as DoctrineType;
-use Fleetbase\LaravelMysqlSpatial\Schema\Builder;
-use Fleetbase\LaravelMysqlSpatial\Schema\Grammars\MySqlGrammar;
+use Fleetbase\Database\Spatial\Schema\Builder;
+use Fleetbase\Database\Spatial\Schema\Grammars\MySqlGrammar;
 use Illuminate\Database\MySqlConnection as IlluminateMySqlConnection;
 
 class MysqlConnection extends IlluminateMySqlConnection

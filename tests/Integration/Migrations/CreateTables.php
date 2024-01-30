@@ -1,6 +1,6 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
+use Fleetbase\Database\Spatial\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 

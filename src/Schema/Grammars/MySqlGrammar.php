@@ -1,8 +1,8 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial\Schema\Grammars;
+namespace Fleetbase\Database\Spatial\Schema\Grammars;
 
-use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
+use Fleetbase\Database\Spatial\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\MySqlGrammar as IlluminateMySqlGrammar;
 use Illuminate\Support\Fluent;
 

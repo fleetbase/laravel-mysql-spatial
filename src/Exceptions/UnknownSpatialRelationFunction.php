@@ -1,6 +1,6 @@
 <?php
 
-namespace Fleetbase\LaravelMysqlSpatial\Exceptions;
+namespace Fleetbase\Database\Spatial\Exceptions;
 
 class UnknownSpatialRelationFunction extends \RuntimeException
 {

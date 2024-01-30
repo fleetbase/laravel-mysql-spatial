@@ -1,8 +1,8 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\Types\LineString;
-use Fleetbase\LaravelMysqlSpatial\Types\Point;
-use Fleetbase\LaravelMysqlSpatial\Types\Polygon;
+use Fleetbase\Database\Spatial\Types\LineString;
+use Fleetbase\Database\Spatial\Types\Point;
+use Fleetbase\Database\Spatial\Types\Polygon;
 
 class PolygonTest extends BaseTestCase
 {
@@ -57,7 +57,7 @@ class PolygonTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            \Fleetbase\Database\Spatial\Exceptions\InvalidGeoJsonException::class,
             'Expected GeoJson\Geometry\Polygon, got GeoJson\Geometry\Point'
         );
         Polygon::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');

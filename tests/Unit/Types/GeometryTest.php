@@ -1,14 +1,14 @@
 <?php
 
-use Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownWKTTypeException;
-use Fleetbase\LaravelMysqlSpatial\Types\Geometry;
-use Fleetbase\LaravelMysqlSpatial\Types\GeometryCollection;
-use Fleetbase\LaravelMysqlSpatial\Types\LineString;
-use Fleetbase\LaravelMysqlSpatial\Types\MultiLineString;
-use Fleetbase\LaravelMysqlSpatial\Types\MultiPoint;
-use Fleetbase\LaravelMysqlSpatial\Types\MultiPolygon;
-use Fleetbase\LaravelMysqlSpatial\Types\Point;
-use Fleetbase\LaravelMysqlSpatial\Types\Polygon;
+use Fleetbase\Database\Spatial\Exceptions\UnknownWKTTypeException;
+use Fleetbase\Database\Spatial\Types\Geometry;
+use Fleetbase\Database\Spatial\Types\GeometryCollection;
+use Fleetbase\Database\Spatial\Types\LineString;
+use Fleetbase\Database\Spatial\Types\MultiLineString;
+use Fleetbase\Database\Spatial\Types\MultiPoint;
+use Fleetbase\Database\Spatial\Types\MultiPolygon;
+use Fleetbase\Database\Spatial\Types\Point;
+use Fleetbase\Database\Spatial\Types\Polygon;
 
 class GeometryTest extends BaseTestCase
 {
