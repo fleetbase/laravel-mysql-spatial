@@ -83,6 +83,7 @@ class MultiLineString extends GeometryCollection
      *
      * @return GeoJsonMultiLineString
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $lineStrings = [];

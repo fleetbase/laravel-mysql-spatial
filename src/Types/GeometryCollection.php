@@ -92,6 +92,7 @@ class GeometryCollection extends Geometry implements \IteratorAggregate, \ArrayA
         return isset($this->items[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->offsetExists($offset) ? $this->items[$offset] : null;
@@ -141,6 +142,7 @@ class GeometryCollection extends Geometry implements \IteratorAggregate, \ArrayA
      *
      * @return \GeoJson\Geometry\GeometryCollection
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $geometries = [];
