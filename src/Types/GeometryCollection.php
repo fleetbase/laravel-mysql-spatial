@@ -2,17 +2,12 @@
 
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
-use ArrayAccess;
-use ArrayIterator;
-use Countable;
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use GeoJson\Feature\FeatureCollection;
 use GeoJson\GeoJson;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use Illuminate\Contracts\Support\Arrayable;
-use InvalidArgumentException;
-use IteratorAggregate;
 
-class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAccess, Arrayable, Countable
+class GeometryCollection extends Geometry implements \IteratorAggregate, \ArrayAccess, Arrayable, \Countable
 {
     /**
      * The minimum number of items required to create this collection.
@@ -39,7 +34,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
      * @param GeometryInterface[] $geometries
      * @param int                 $srid
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $geometries, $srid = 0)
     {
@@ -78,7 +73,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         return new static(array_map(function ($geometry_string) {
             $klass = Geometry::getWKTClass($geometry_string);
 
-            return call_user_func($klass.'::fromWKT', $geometry_string);
+            return call_user_func($klass . '::fromWKT', $geometry_string);
         }, $geometry_strings), $srid);
     }
 
@@ -89,7 +84,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
 
     public function getIterator()
     {
-        return new ArrayIterator($this->items);
+        return new \ArrayIterator($this->items);
     }
 
     public function offsetExists($offset)
@@ -97,6 +92,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         return isset($this->items[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->offsetExists($offset) ? $this->items[$offset] : null;
@@ -130,7 +126,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         }
 
         if (!is_a($geoJson, FeatureCollection::class)) {
-            throw new InvalidGeoJsonException('Expected '.FeatureCollection::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . FeatureCollection::class . ', got ' . get_class($geoJson));
         }
 
         $set = [];
@@ -146,6 +142,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
      *
      * @return \GeoJson\Geometry\GeometryCollection
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $geometries = [];
@@ -158,8 +155,6 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
 
     /**
      * Checks whether the items are valid to create this collection.
-     *
-     * @param array $items
      */
     protected function validateItems(array $items)
     {
@@ -173,8 +168,6 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
     /**
      * Checks whether the array has enough items to generate a valid WKT.
      *
-     * @param array $items
-     *
      * @see $minimumCollectionItems
      */
     protected function validateItemCount(array $items)
@@ -182,30 +175,19 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         if (count($items) < $this->minimumCollectionItems) {
             $entries = $this->minimumCollectionItems === 1 ? 'entry' : 'entries';
 
-            throw new InvalidArgumentException(sprintf(
-                '%s must contain at least %d %s',
-                get_class($this),
-                $this->minimumCollectionItems,
-                $entries
-            ));
+            throw new \InvalidArgumentException(sprintf('%s must contain at least %d %s', get_class($this), $this->minimumCollectionItems, $entries));
         }
     }
 
     /**
      * Checks the type of the items in the array.
      *
-     * @param $item
-     *
      * @see $collectionItemType
      */
     protected function validateItemType($item)
     {
         if (!$item instanceof $this->collectionItemType) {
-            throw new InvalidArgumentException(sprintf(
-                '%s must be a collection of %s',
-                get_class($this),
-                $this->collectionItemType
-            ));
+            throw new \InvalidArgumentException(sprintf('%s must be a collection of %s', get_class($this), $this->collectionItemType));
         }
     }
 }

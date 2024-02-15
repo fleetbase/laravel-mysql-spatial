@@ -66,7 +66,7 @@ class MultiPolygonTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
             sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPolygon::class, GeoJson\Geometry\Point::class)
         );
         MultiPolygon::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
@@ -74,7 +74,7 @@ class MultiPolygonTest extends BaseTestCase
 
     public function testJsonSerialize()
     {
-        $this->assertInstanceOf(\GeoJson\Geometry\MultiPolygon::class, $this->getMultiPolygon()->jsonSerialize());
+        $this->assertInstanceOf(GeoJson\Geometry\MultiPolygon::class, $this->getMultiPolygon()->jsonSerialize());
         $this->assertSame('{"type":"MultiPolygon","coordinates":[[[[0,0],[1,0],[1,1],[0,1],[0,0]],[[10,10],[20,10],[20,20],[10,20],[10,10]]],[[[100,100],[200,100],[200,200],[100,200],[100,100]]]]}', json_encode($this->getMultiPolygon()));
     }
 
@@ -111,7 +111,7 @@ class MultiPolygonTest extends BaseTestCase
         $this->assertEquals($polygon1, $multipolygon[1]);
 
         // assert setting
-        $polygon2 = $this->getPolygon3();
+        $polygon2       = $this->getPolygon3();
         $multipolygon[] = $polygon2;
         $this->assertEquals($polygon2, $multipolygon[2]);
 

@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Type;
 
 class MultiPolygon extends Type
 {
-    const MULTIPOLYGON = 'multipolygon';
+    public const MULTIPOLYGON = 'multipolygon';
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {

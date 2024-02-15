@@ -3,7 +3,6 @@
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
 use ArrayAccess;
-use InvalidArgumentException;
 
 abstract class PointCollection extends GeometryCollection
 {
@@ -37,8 +36,6 @@ abstract class PointCollection extends GeometryCollection
     }
 
     /**
-     * @param \Fleetbase\LaravelMysqlSpatial\Types\Point $point
-     *
      * @deprecated 2.1.0 Use array_unshift($multipoint, $point); instead
      * @see array_unshift
      * @see ArrayAccess
@@ -49,8 +46,6 @@ abstract class PointCollection extends GeometryCollection
     }
 
     /**
-     * @param \Fleetbase\LaravelMysqlSpatial\Types\Point $point
-     *
      * @deprecated 2.1.0 Use $multipoint[] = $point; instead
      * @see ArrayAccess
      */
@@ -60,9 +55,6 @@ abstract class PointCollection extends GeometryCollection
     }
 
     /**
-     * @param $index
-     * @param \Fleetbase\LaravelMysqlSpatial\Types\Point $point
-     *
      * @deprecated 2.1.0 Use array_splice($multipoint, $index, 0, [$point]); instead
      * @see array_splice
      * @see ArrayAccess
@@ -70,7 +62,7 @@ abstract class PointCollection extends GeometryCollection
     public function insertPoint($index, Point $point)
     {
         if (count($this->items) - 1 < $index) {
-            throw new InvalidArgumentException('$index is greater than the size of the array');
+            throw new \InvalidArgumentException('$index is greater than the size of the array');
         }
 
         array_splice($this->items, $index, 0, [$point]);

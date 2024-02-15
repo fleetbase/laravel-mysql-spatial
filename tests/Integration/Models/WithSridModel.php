@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
  * Class WithSridModel.
  *
  * @property int                                          id
- * @property \Fleetbase\LaravelMysqlSpatial\Types\Point      location
- * @property \Fleetbase\LaravelMysqlSpatial\Types\LineString line
- * @property \Fleetbase\LaravelMysqlSpatial\Types\LineString shape
+ * @property Fleetbase\LaravelMysqlSpatial\Types\Point      location
+ * @property Fleetbase\LaravelMysqlSpatial\Types\LineString line
+ * @property Fleetbase\LaravelMysqlSpatial\Types\LineString shape
  */
 class WithSridModel extends Model
 {

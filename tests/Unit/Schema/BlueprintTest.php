@@ -2,15 +2,13 @@
 
 namespace Schema;
 
-use BaseTestCase;
 use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
 use Illuminate\Database\Schema\ColumnDefinition;
-use Mockery;
 
-class BlueprintTest extends BaseTestCase
+class BlueprintTest extends \BaseTestCase
 {
     /**
-     * @var \Fleetbase\LaravelMysqlSpatial\Schema\Blueprint
+     * @var Blueprint
      */
     protected $blueprint;
 
@@ -18,7 +16,7 @@ class BlueprintTest extends BaseTestCase
     {
         parent::setUp();
 
-        $this->blueprint = Mockery::mock(Blueprint::class)
+        $this->blueprint = \Mockery::mock(Blueprint::class)
             ->makePartial()->shouldAllowMockingProtectedMethods();
     }
 

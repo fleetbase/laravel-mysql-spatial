@@ -43,7 +43,7 @@ class MultiPointTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
             sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPoint::class, GeoJson\Geometry\Point::class)
         );
         MultiPoint::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
@@ -55,7 +55,7 @@ class MultiPointTest extends BaseTestCase
 
         $multipoint = new MultiPoint($collection);
 
-        $this->assertInstanceOf(\GeoJson\Geometry\MultiPoint::class, $multipoint->jsonSerialize());
+        $this->assertInstanceOf(GeoJson\Geometry\MultiPoint::class, $multipoint->jsonSerialize());
         $this->assertSame('{"type":"MultiPoint","coordinates":[[0,0],[1,0],[1,1]]}', json_encode($multipoint));
     }
 
@@ -82,8 +82,8 @@ class MultiPointTest extends BaseTestCase
 
     public function testArrayAccess()
     {
-        $point0 = new Point(0, 0);
-        $point1 = new Point(1, 1);
+        $point0     = new Point(0, 0);
+        $point1     = new Point(1, 1);
         $multipoint = new MultiPoint([$point0, $point1]);
 
         // assert getting
@@ -91,7 +91,7 @@ class MultiPointTest extends BaseTestCase
         $this->assertEquals($point1, $multipoint[1]);
 
         // assert setting
-        $point2 = new Point(2, 2);
+        $point2       = new Point(2, 2);
         $multipoint[] = $point2;
         $this->assertEquals($point2, $multipoint[2]);
 
@@ -105,8 +105,8 @@ class MultiPointTest extends BaseTestCase
 
     public function testDeprecatedPrependPoint()
     {
-        $point1 = new Point(1, 1);
-        $point2 = new Point(2, 2);
+        $point1     = new Point(1, 1);
+        $point2     = new Point(2, 2);
         $multipoint = new MultiPoint([$point1, $point2]);
 
         $point0 = new Point(0, 0);
@@ -119,8 +119,8 @@ class MultiPointTest extends BaseTestCase
 
     public function testDeprecatedAppendPoint()
     {
-        $point0 = new Point(0, 0);
-        $point1 = new Point(1, 1);
+        $point0     = new Point(0, 0);
+        $point1     = new Point(1, 1);
         $multipoint = new MultiPoint([$point0, $point1]);
 
         $point2 = new Point(2, 2);
@@ -133,8 +133,8 @@ class MultiPointTest extends BaseTestCase
 
     public function testDeprecatedInsertPoint()
     {
-        $point1 = new Point(1, 1);
-        $point3 = new Point(3, 3);
+        $point1     = new Point(1, 1);
+        $point3     = new Point(3, 3);
         $multipoint = new MultiPoint([$point1, $point3]);
 
         $point2 = new Point(2, 2);

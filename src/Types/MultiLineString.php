@@ -2,9 +2,9 @@
 
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use GeoJson\GeoJson;
 use GeoJson\Geometry\MultiLineString as GeoJsonMultiLineString;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class MultiLineString extends GeometryCollection
 {
@@ -34,7 +34,7 @@ class MultiLineString extends GeometryCollection
 
     public static function fromString($wktArgument, $srid = 0)
     {
-        $str = preg_split('/\)\s*,\s*\(/', substr(trim($wktArgument), 1, -1));
+        $str         = preg_split('/\)\s*,\s*\(/', substr(trim($wktArgument), 1, -1));
         $lineStrings = array_map(function ($data) {
             return LineString::fromString($data);
         }, $str);
@@ -63,7 +63,7 @@ class MultiLineString extends GeometryCollection
         }
 
         if (!is_a($geoJson, GeoJsonMultiLineString::class)) {
-            throw new InvalidGeoJsonException('Expected '.GeoJsonMultiLineString::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . GeoJsonMultiLineString::class . ', got ' . get_class($geoJson));
         }
 
         $set = [];
@@ -81,8 +81,9 @@ class MultiLineString extends GeometryCollection
     /**
      * Convert to GeoJson Point that is jsonable to GeoJSON.
      *
-     * @return \GeoJson\Geometry\MultiLineString
+     * @return GeoJsonMultiLineString
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $lineStrings = [];

@@ -2,9 +2,9 @@
 
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
+use Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownWKTTypeException;
 use GeoIO\WKB\Parser\Parser;
 use GeoJson\GeoJson;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownWKTTypeException;
 use Illuminate\Contracts\Support\Jsonable;
 
 abstract class Geometry implements GeometryInterface, Jsonable, \JsonSerializable
@@ -38,7 +38,7 @@ abstract class Geometry implements GeometryInterface, Jsonable, \JsonSerializabl
 
     public static function getWKTArgument($value)
     {
-        $left = strpos($value, '(');
+        $left  = strpos($value, '(');
         $right = strrpos($value, ')');
 
         return substr($value, $left + 1, $right - $left - 1);
@@ -65,7 +65,7 @@ abstract class Geometry implements GeometryInterface, Jsonable, \JsonSerializabl
             case 'GEOMETRYCOLLECTION':
                 return GeometryCollection::class;
             default:
-                throw new UnknownWKTTypeException('Type was '.$type);
+                throw new UnknownWKTTypeException('Type was ' . $type);
         }
     }
 
@@ -74,7 +74,7 @@ abstract class Geometry implements GeometryInterface, Jsonable, \JsonSerializabl
         $srid = substr($wkb, 0, 4);
         $srid = unpack('L', $srid)[1];
 
-        $wkb = substr($wkb, 4);
+        $wkb    = substr($wkb, 4);
         $parser = new Parser(new Factory());
 
         /** @var Geometry $parsed */
@@ -108,7 +108,7 @@ abstract class Geometry implements GeometryInterface, Jsonable, \JsonSerializabl
             $geoJson = $geoJson->getGeometry();
         }
 
-        $type = '\Fleetbase\LaravelMysqlSpatial\Types\\'.$geoJson->getType();
+        $type = '\Fleetbase\LaravelMysqlSpatial\Types\\' . $geoJson->getType();
 
         return $type::fromJson($geoJson);
     }
