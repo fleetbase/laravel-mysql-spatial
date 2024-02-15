@@ -26,6 +26,6 @@ class ConnectionFactoryBaseTest extends BaseTestCase
         $factory->shouldAllowMockingProtectedMethods();
         $conn = $factory->createConnection('pgsql', $pdo, 'database');
 
-        $this->assertInstanceOf(\Illuminate\Database\PostgresConnection::class, $conn);
+        $this->assertInstanceOf(Illuminate\Database\PostgresConnection::class, $conn);
     }
 }

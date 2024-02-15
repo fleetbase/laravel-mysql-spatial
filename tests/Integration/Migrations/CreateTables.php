@@ -14,7 +14,7 @@ class CreateLocationTable extends Migration
     public function up()
     {
         Schema::create('geometry', function (Blueprint $table) {
-            $table->charset = 'utf8mb4';
+            $table->charset   = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->increments('id');
             $table->geometry('geo')->default(null)->nullable();
@@ -34,7 +34,7 @@ class CreateLocationTable extends Migration
         });
 
         Schema::create('with_srid', function (Blueprint $table) {
-            $table->charset = 'utf8mb4';
+            $table->charset   = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->increments('id');
             $table->geometry('geo', 3857)->default(null)->nullable();

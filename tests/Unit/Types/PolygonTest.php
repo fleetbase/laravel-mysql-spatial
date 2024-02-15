@@ -57,7 +57,7 @@ class PolygonTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
             'Expected GeoJson\Geometry\Polygon, got GeoJson\Geometry\Point'
         );
         Polygon::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
@@ -65,7 +65,7 @@ class PolygonTest extends BaseTestCase
 
     public function testJsonSerialize()
     {
-        $this->assertInstanceOf(\GeoJson\Geometry\Polygon::class, $this->polygon->jsonSerialize());
+        $this->assertInstanceOf(GeoJson\Geometry\Polygon::class, $this->polygon->jsonSerialize());
         $this->assertSame(
             '{"type":"Polygon","coordinates":[[[0,0],[1,0],[1,1],[0,1],[0,0]]]}',
             json_encode($this->polygon)

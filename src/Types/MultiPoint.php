@@ -2,9 +2,9 @@
 
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use GeoJson\GeoJson;
 use GeoJson\Geometry\MultiPoint as GeoJsonMultiPoint;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class MultiPoint extends PointCollection
 {
@@ -53,7 +53,7 @@ class MultiPoint extends PointCollection
         }
 
         if (!is_a($geoJson, GeoJsonMultiPoint::class)) {
-            throw new InvalidGeoJsonException('Expected '.GeoJsonMultiPoint::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . GeoJsonMultiPoint::class . ', got ' . get_class($geoJson));
         }
 
         $set = [];
@@ -67,7 +67,7 @@ class MultiPoint extends PointCollection
     /**
      * Convert to GeoJson MultiPoint that is jsonable to GeoJSON.
      *
-     * @return \GeoJson\Geometry\MultiPoint
+     * @return GeoJsonMultiPoint
      */
     public function jsonSerialize()
     {

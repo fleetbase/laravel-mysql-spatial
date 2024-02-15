@@ -2,9 +2,9 @@
 
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use GeoJson\GeoJson;
 use GeoJson\Geometry\MultiPolygon as GeoJsonMultiPolygon;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class MultiPolygon extends GeometryCollection
 {
@@ -36,7 +36,7 @@ class MultiPolygon extends GeometryCollection
 
     public static function fromString($wktArgument, $srid = 0)
     {
-        $parts = preg_split('/(\)\s*\)\s*,\s*\(\s*\()/', $wktArgument, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $parts    = preg_split('/(\)\s*\)\s*,\s*\(\s*\()/', $wktArgument, -1, PREG_SPLIT_DELIM_CAPTURE);
         $polygons = static::assembleParts($parts);
 
         return new static(array_map(function ($polygonString) {
@@ -67,20 +67,18 @@ class MultiPolygon extends GeometryCollection
      * "((-1 -1,-1 -2,-2 -2,-2 -1,-1 -1))",
      * "((-1 -1,-1 -2,-2 -2,-2 -1,-1 -1))"
      *
-     * @param array $parts
-     *
      * @return array
      */
     protected static function assembleParts(array $parts)
     {
         $polygons = [];
-        $count = count($parts);
+        $count    = count($parts);
 
         for ($i = 0; $i < $count; $i++) {
             if ($i % 2 !== 0) {
                 list($end, $start) = explode(',', $parts[$i]);
                 $polygons[$i - 1] .= $end;
-                $polygons[++$i] = $start.$parts[$i];
+                $polygons[++$i] = $start . $parts[$i];
             } else {
                 $polygons[] = $parts[$i];
             }
@@ -103,7 +101,7 @@ class MultiPolygon extends GeometryCollection
         }
 
         if (!is_a($geoJson, GeoJsonMultiPolygon::class)) {
-            throw new InvalidGeoJsonException('Expected '.GeoJsonMultiPolygon::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . GeoJsonMultiPolygon::class . ', got ' . get_class($geoJson));
         }
 
         $set = [];
@@ -125,7 +123,7 @@ class MultiPolygon extends GeometryCollection
     /**
      * Convert to GeoJson MultiPolygon that is jsonable to GeoJSON.
      *
-     * @return \GeoJson\Geometry\MultiPolygon
+     * @return GeoJsonMultiPolygon
      */
     public function jsonSerialize()
     {

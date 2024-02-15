@@ -16,17 +16,17 @@ class SpatialTest extends IntegrationBaseTestCase
 
     public function testSpatialFieldsNotDefinedException()
     {
-        $geo = new NoSpatialFieldsModel();
+        $geo           = new NoSpatialFieldsModel();
         $geo->geometry = new Point(1, 2);
         $geo->save();
 
-        $this->assertException(\Fleetbase\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException::class);
+        $this->assertException(Fleetbase\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException::class);
         NoSpatialFieldsModel::all();
     }
 
     public function testInsertPoint()
     {
-        $geo = new GeometryModel();
+        $geo           = new GeometryModel();
         $geo->location = new Point(1, 2);
         $geo->save();
         $this->assertDatabaseHas('geometry', ['id' => $geo->id]);
@@ -37,7 +37,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $geo = new GeometryModel();
 
         $geo->location = new Point(1, 2);
-        $geo->line = new LineString([new Point(1, 1), new Point(2, 2)]);
+        $geo->line     = new LineString([new Point(1, 1), new Point(2, 2)]);
         $geo->save();
         $this->assertDatabaseHas('geometry', ['id' => $geo->id]);
     }
@@ -47,7 +47,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $geo = new GeometryModel();
 
         $geo->location = new Point(1, 2);
-        $geo->shape = Polygon::fromWKT('POLYGON((0 10,10 10,10 0,0 0,0 10))');
+        $geo->shape    = Polygon::fromWKT('POLYGON((0 10,10 10,10 0,0 0,0 10))');
         $geo->save();
         $this->assertDatabaseHas('geometry', ['id' => $geo->id]);
     }
@@ -56,7 +56,7 @@ class SpatialTest extends IntegrationBaseTestCase
     {
         $geo = new GeometryModel();
 
-        $geo->location = new Point(1, 2);
+        $geo->location        = new Point(1, 2);
         $geo->multi_locations = new MultiPoint([new Point(1, 1), new Point(2, 2)]);
         $geo->save();
         $this->assertDatabaseHas('geometry', ['id' => $geo->id]);
@@ -108,11 +108,11 @@ class SpatialTest extends IntegrationBaseTestCase
 
     public function testUpdate()
     {
-        $geo = new GeometryModel();
+        $geo           = new GeometryModel();
         $geo->location = new Point(1, 2);
         $geo->save();
 
-        $to_update = GeometryModel::all()->first();
+        $to_update           = GeometryModel::all()->first();
         $to_update->location = new Point(2, 3);
         $to_update->save();
 
@@ -129,15 +129,15 @@ class SpatialTest extends IntegrationBaseTestCase
 
     public function testDistance()
     {
-        $loc1 = new GeometryModel();
+        $loc1           = new GeometryModel();
         $loc1->location = new Point(1, 1);
         $loc1->save();
 
-        $loc2 = new GeometryModel();
+        $loc2           = new GeometryModel();
         $loc2->location = new Point(2, 2); // Distance from loc1: 1.4142135623731
         $loc2->save();
 
-        $loc3 = new GeometryModel();
+        $loc3           = new GeometryModel();
         $loc3->location = new Point(3, 3); // Distance from loc1: 2.8284271247462
         $loc3->save();
 
@@ -163,15 +163,15 @@ class SpatialTest extends IntegrationBaseTestCase
 
     public function testDistanceSphere()
     {
-        $loc1 = new GeometryModel();
+        $loc1           = new GeometryModel();
         $loc1->location = new Point(40.767864, -73.971732);
         $loc1->save();
 
-        $loc2 = new GeometryModel();
+        $loc2           = new GeometryModel();
         $loc2->location = new Point(40.767664, -73.971271); // Distance from loc1: 44.741406484588
         $loc2->save();
 
-        $loc3 = new GeometryModel();
+        $loc3           = new GeometryModel();
         $loc3->location = new Point(40.761434, -73.977619); // Distance from loc1: 870.06424066202
         $loc3->save();
 
@@ -201,11 +201,11 @@ class SpatialTest extends IntegrationBaseTestCase
 
     public function testDistanceValue()
     {
-        $loc1 = new GeometryModel();
+        $loc1           = new GeometryModel();
         $loc1->location = new Point(1, 1);
         $loc1->save();
 
-        $loc2 = new GeometryModel();
+        $loc2           = new GeometryModel();
         $loc2->location = new Point(2, 2); // Distance from loc1: 1.4142135623731
         $loc2->save();
 
@@ -217,11 +217,11 @@ class SpatialTest extends IntegrationBaseTestCase
 
     public function testDistanceSphereValue()
     {
-        $loc1 = new GeometryModel();
+        $loc1           = new GeometryModel();
         $loc1->location = new Point(40.767864, -73.971732);
         $loc1->save();
 
-        $loc2 = new GeometryModel();
+        $loc2           = new GeometryModel();
         $loc2->location = new Point(40.767664, -73.971271); // Distance from loc1: 44.741406484236
         $loc2->save();
 
@@ -238,24 +238,24 @@ class SpatialTest extends IntegrationBaseTestCase
 
     public function testOrderBySpatialWithUnknownFunction()
     {
-        $loc = new GeometryModel();
+        $loc           = new GeometryModel();
         $loc->location = new Point(1, 1);
 
-        $this->assertException(\Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownSpatialFunctionException::class);
+        $this->assertException(Fleetbase\LaravelMysqlSpatial\Exceptions\UnknownSpatialFunctionException::class);
         GeometryModel::orderBySpatial('location', $loc->location, 'does-not-exist')->get();
     }
 
     public function testOrderByDistance()
     {
-        $loc2 = new GeometryModel();
+        $loc2           = new GeometryModel();
         $loc2->location = new Point(2, 2); // Distance from loc1: 1.4142135623731
         $loc2->save();
 
-        $loc1 = new GeometryModel();
+        $loc1           = new GeometryModel();
         $loc1->location = new Point(1, 1);
         $loc1->save();
 
-        $loc3 = new GeometryModel();
+        $loc3           = new GeometryModel();
         $loc3->location = new Point(3, 3); // Distance from loc1: 2.8284271247462
         $loc3->save();
 
@@ -281,15 +281,15 @@ class SpatialTest extends IntegrationBaseTestCase
 
     public function testOrderByDistanceSphere()
     {
-        $loc2 = new GeometryModel();
+        $loc2           = new GeometryModel();
         $loc2->location = new Point(40.767664, -73.971271); // Distance from loc1: 44.741406484588
         $loc2->save();
 
-        $loc1 = new GeometryModel();
+        $loc1           = new GeometryModel();
         $loc1->location = new Point(40.767864, -73.971732);
         $loc1->save();
 
-        $loc3 = new GeometryModel();
+        $loc3           = new GeometryModel();
         $loc3->location = new Point(40.761434, -73.977619); // Distance from loc1: 870.06424066202
         $loc3->save();
 
@@ -312,7 +312,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $this->assertEquals($loc1->location, $c[2]->location);
     }
 
-    //public function testBounding() {
+    // public function testBounding() {
     //    $point = new Point(0, 0);
     //
     //    $linestring1 = \Fleetbase\LaravelMysqlSpatial\Types\LineString::fromWkt("LINESTRING(1 1, 2 2)");
@@ -342,5 +342,5 @@ class SpatialTest extends IntegrationBaseTestCase
     //    $this->assertFalse($result->contains($geo2));
     //    $this->assertTrue($result->contains($geo3));
     //
-    //}
+    // }
 }

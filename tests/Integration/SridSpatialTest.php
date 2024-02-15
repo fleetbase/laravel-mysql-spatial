@@ -16,7 +16,7 @@ class SridSpatialTest extends IntegrationBaseTestCase
 
     public function testInsertPointWithSrid()
     {
-        $geo = new WithSridModel();
+        $geo           = new WithSridModel();
         $geo->location = new Point(1, 2, 3857);
         $geo->save();
         $this->assertDatabaseHas('with_srid', ['id' => $geo->id]);
@@ -27,7 +27,7 @@ class SridSpatialTest extends IntegrationBaseTestCase
         $geo = new WithSridModel();
 
         $geo->location = new Point(1, 2, 3857);
-        $geo->line = new LineString([new Point(1, 1), new Point(2, 2)], 3857);
+        $geo->line     = new LineString([new Point(1, 1), new Point(2, 2)], 3857);
         $geo->save();
         $this->assertDatabaseHas('with_srid', ['id' => $geo->id]);
     }
@@ -37,7 +37,7 @@ class SridSpatialTest extends IntegrationBaseTestCase
         $geo = new WithSridModel();
 
         $geo->location = new Point(1, 2, 3857);
-        $geo->shape = Polygon::fromWKT('POLYGON((0 10,10 10,10 0,0 0,0 10))', 3857);
+        $geo->shape    = Polygon::fromWKT('POLYGON((0 10,10 10,10 0,0 0,0 10))', 3857);
         $geo->save();
         $this->assertDatabaseHas('with_srid', ['id' => $geo->id]);
     }
@@ -46,7 +46,7 @@ class SridSpatialTest extends IntegrationBaseTestCase
     {
         $geo = new WithSridModel();
 
-        $geo->location = new Point(1, 2, 3857);
+        $geo->location        = new Point(1, 2, 3857);
         $geo->multi_locations = new MultiPoint([new Point(1, 1), new Point(2, 2)], 3857);
         $geo->save();
         $this->assertDatabaseHas('with_srid', ['id' => $geo->id]);
@@ -83,11 +83,11 @@ class SridSpatialTest extends IntegrationBaseTestCase
 
     public function testUpdateWithSrid()
     {
-        $geo = new WithSridModel();
+        $geo           = new WithSridModel();
         $geo->location = new Point(1, 2, 3857);
         $geo->save();
 
-        $to_update = WithSridModel::all()->first();
+        $to_update           = WithSridModel::all()->first();
         $to_update->location = new Point(2, 3, 3857);
         $to_update->save();
 
@@ -104,16 +104,16 @@ class SridSpatialTest extends IntegrationBaseTestCase
 
     public function testInsertPointWithWrongSrid()
     {
-        $geo = new WithSridModel();
+        $geo           = new WithSridModel();
         $geo->location = new Point(1, 2);
 
         $this->assertException(
             Illuminate\Database\QueryException::class,
-            'SQLSTATE[HY000]: General error: 3643 The SRID of the geometry '.
-            'does not match the SRID of the column \'location\'. The SRID '.
-            'of the geometry is 0, but the SRID of the column is 3857. '.
-            'Consider changing the SRID of the geometry or the SRID property '.
-            'of the column. (SQL: insert into `with_srid` (`location`) values '.
+            'SQLSTATE[HY000]: General error: 3643 The SRID of the geometry ' .
+            'does not match the SRID of the column \'location\'. The SRID ' .
+            'of the geometry is 0, but the SRID of the column is 3857. ' .
+            'Consider changing the SRID of the geometry or the SRID property ' .
+            'of the column. (SQL: insert into `with_srid` (`location`) values ' .
             '(ST_GeomFromText(POINT(2 1), 0, \'axis-order=long-lat\')))'
         );
         $geo->save();
@@ -121,11 +121,11 @@ class SridSpatialTest extends IntegrationBaseTestCase
 
     public function testGeometryInsertedHasRightSrid()
     {
-        $geo = new WithSridModel();
+        $geo           = new WithSridModel();
         $geo->location = new Point(1, 2, 3857);
         $geo->save();
 
-        $srid = \DB::selectOne('select ST_SRID(location) as srid from with_srid');
+        $srid = DB::selectOne('select ST_SRID(location) as srid from with_srid');
         $this->assertEquals(3857, $srid->srid);
 
         $result = WithSridModel::first();

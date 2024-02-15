@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Type;
 
 class MultiPoint extends Type
 {
-    const MULTIPOINT = 'multipoint';
+    public const MULTIPOINT = 'multipoint';
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {

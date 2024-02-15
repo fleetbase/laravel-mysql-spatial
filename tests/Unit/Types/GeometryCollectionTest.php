@@ -28,7 +28,7 @@ class GeometryCollectionTest extends BaseTestCase
 
     public function testJsonSerialize()
     {
-        $this->assertInstanceOf(\GeoJson\Geometry\GeometryCollection::class, $this->getGeometryCollection()->jsonSerialize());
+        $this->assertInstanceOf(GeoJson\Geometry\GeometryCollection::class, $this->getGeometryCollection()->jsonSerialize());
 
         $this->assertSame('{"type":"GeometryCollection","geometries":[{"type":"LineString","coordinates":[[0,0],[1,0],[1,1],[0,1],[0,0]]},{"type":"Point","coordinates":[200,100]}]}', json_encode($this->getGeometryCollection()->jsonSerialize()));
     }
@@ -85,8 +85,8 @@ class GeometryCollectionTest extends BaseTestCase
 
     public function testArrayAccess()
     {
-        $linestring = $this->getLineString();
-        $point = $this->getPoint();
+        $linestring         = $this->getLineString();
+        $point              = $this->getPoint();
         $geometryCollection = new GeometryCollection([$linestring, $point]);
 
         // assert getting
@@ -94,7 +94,7 @@ class GeometryCollectionTest extends BaseTestCase
         $this->assertEquals($point, $geometryCollection[1]);
 
         // assert setting
-        $polygon = $this->getPolygon();
+        $polygon              = $this->getPolygon();
         $geometryCollection[] = $polygon;
         $this->assertEquals($polygon, $geometryCollection[2]);
 
@@ -105,7 +105,7 @@ class GeometryCollectionTest extends BaseTestCase
         $this->assertEquals($polygon, $geometryCollection[2]);
 
         // assert insert
-        $point100 = new Point(100, 100);
+        $point100                = new Point(100, 100);
         $geometryCollection[100] = $point100;
         $this->assertEquals($point100, $geometryCollection[100]);
 
@@ -130,7 +130,7 @@ class GeometryCollectionTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
             sprintf('Expected %s, got %s', GeoJson\Feature\FeatureCollection::class, GeoJson\Geometry\Point::class)
         );
         GeometryCollection::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');

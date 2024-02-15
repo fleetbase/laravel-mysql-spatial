@@ -6,17 +6,17 @@ use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
 abstract class IntegrationBaseTestCase extends BaseTestCase
 {
-    protected $after_fix = false;
+    protected $after_fix  = false;
     protected $migrations = [];
 
     /**
      * Boots the application.
      *
-     * @return \Illuminate\Foundation\Application
+     * @return Illuminate\Foundation\Application
      */
     public function createApplication()
     {
-        $app = require __DIR__.'/../../vendor/laravel/laravel/bootstrap/app.php';
+        $app = require __DIR__ . '/../../vendor/laravel/laravel/bootstrap/app.php';
         $app->register(SpatialServiceProvider::class);
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
@@ -54,9 +54,9 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
             (new $migrationClass())->up();
         });
 
-        //\DB::listen(function($sql) {
+        // \DB::listen(function($sql) {
         //    var_dump($sql);
-        //});
+        // });
     }
 
     public function tearDown()
@@ -71,7 +71,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
     // MySQL 8.0.4 fixed bug #26941370 and bug #88031
     private function isMySQL8AfterFix()
     {
-        $results = DB::select(DB::raw('select version()'));
+        $results       = DB::select(DB::raw('select version()'));
         $mysql_version = $results[0]->{'version()'};
 
         return version_compare($mysql_version, '8.0.4', '>=');
@@ -98,7 +98,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
         }
     }
 
-    private function onMigrations(\Closure $closure, $reverse_sort = false)
+    private function onMigrations(Closure $closure, $reverse_sort = false)
     {
         $migrations = $this->migrations;
         $reverse_sort ? rsort($migrations, SORT_STRING) : sort($migrations, SORT_STRING);

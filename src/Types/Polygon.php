@@ -2,9 +2,9 @@
 
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use GeoJson\GeoJson;
 use GeoJson\Geometry\Polygon as GeoJsonPolygon;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class Polygon extends MultiLineString
 {
@@ -20,7 +20,7 @@ class Polygon extends MultiLineString
         }
 
         if (!is_a($geoJson, GeoJsonPolygon::class)) {
-            throw new InvalidGeoJsonException('Expected '.GeoJsonPolygon::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . GeoJsonPolygon::class . ', got ' . get_class($geoJson));
         }
 
         $set = [];
@@ -38,7 +38,7 @@ class Polygon extends MultiLineString
     /**
      * Convert to GeoJson Polygon that is jsonable to GeoJSON.
      *
-     * @return \GeoJson\Geometry\Polygon
+     * @return GeoJsonPolygon
      */
     public function jsonSerialize()
     {

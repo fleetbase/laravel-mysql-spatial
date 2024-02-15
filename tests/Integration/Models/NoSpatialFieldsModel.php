@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class NoSpatialFieldsModel.
  *
- * @property \Fleetbase\LaravelMysqlSpatial\Types\Geometry geometry
+ * @property Fleetbase\LaravelMysqlSpatial\Types\Geometry geometry
  */
 class NoSpatialFieldsModel extends Model
 {

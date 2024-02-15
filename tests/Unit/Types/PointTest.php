@@ -70,7 +70,7 @@ class PointTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
             'Expected GeoJson\Geometry\Point, got GeoJson\Geometry\LineString'
         );
         Point::fromJson('{"type": "LineString","coordinates":[[1,1],[2,2]]}');
@@ -80,7 +80,7 @@ class PointTest extends BaseTestCase
     {
         $point = new Point(1.2, 3.4);
 
-        $this->assertInstanceOf(\GeoJson\Geometry\Point::class, $point->jsonSerialize());
+        $this->assertInstanceOf(GeoJson\Geometry\Point::class, $point->jsonSerialize());
         $this->assertSame('{"type":"Point","coordinates":[3.4,1.2]}', json_encode($point));
     }
 }

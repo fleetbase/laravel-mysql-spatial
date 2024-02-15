@@ -2,9 +2,9 @@
 
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use GeoJson\GeoJson;
 use GeoJson\Geometry\Point as GeoJsonPoint;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class Point extends Geometry
 {
@@ -42,7 +42,7 @@ class Point extends Geometry
 
     public function toPair()
     {
-        return $this->getLng().' '.$this->getLat();
+        return $this->getLng() . ' ' . $this->getLat();
     }
 
     public static function fromPair($pair, $srid = 0)
@@ -62,15 +62,15 @@ class Point extends Geometry
         return static::fromPair($wktArgument, $srid);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getLng().' '.$this->getLat();
+        return $this->getLng() . ' ' . $this->getLat();
     }
 
     /**
-     * @param $geoJson  \GeoJson\Feature\Feature|string
+     * @param $geoJson \GeoJson\Feature\Feature|string
      *
-     * @return \Fleetbase\LaravelMysqlSpatial\Types\Point
+     * @return Point
      */
     public static function fromJson($geoJson)
     {
@@ -79,7 +79,7 @@ class Point extends Geometry
         }
 
         if (!is_a($geoJson, GeoJsonPoint::class)) {
-            throw new InvalidGeoJsonException('Expected '.GeoJsonPoint::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . GeoJsonPoint::class . ', got ' . get_class($geoJson));
         }
 
         $coordinates = $geoJson->getCoordinates();
@@ -90,8 +90,9 @@ class Point extends Geometry
     /**
      * Convert to GeoJson Point that is jsonable to GeoJSON.
      *
-     * @return \GeoJson\Geometry\Point
+     * @return GeoJsonPoint
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return new GeoJsonPoint([$this->getLng(), $this->getLat()]);

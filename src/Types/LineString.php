@@ -2,9 +2,9 @@
 
 namespace Fleetbase\LaravelMysqlSpatial\Types;
 
+use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use GeoJson\GeoJson;
 use GeoJson\Geometry\LineString as GeoJsonLineString;
-use Fleetbase\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class LineString extends PointCollection
 {
@@ -29,7 +29,7 @@ class LineString extends PointCollection
 
     public static function fromString($wktArgument, $srid = 0)
     {
-        $pairs = explode(',', trim($wktArgument));
+        $pairs  = explode(',', trim($wktArgument));
         $points = array_map(function ($pair) {
             return Point::fromPair($pair);
         }, $pairs);
@@ -49,7 +49,7 @@ class LineString extends PointCollection
         }
 
         if (!is_a($geoJson, GeoJsonLineString::class)) {
-            throw new InvalidGeoJsonException('Expected '.GeoJsonLineString::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . GeoJsonLineString::class . ', got ' . get_class($geoJson));
         }
 
         $set = [];
@@ -63,7 +63,7 @@ class LineString extends PointCollection
     /**
      * Convert to GeoJson LineString that is jsonable to GeoJSON.
      *
-     * @return \GeoJson\Geometry\LineString
+     * @return GeoJsonLineString
      */
     public function jsonSerialize()
     {
