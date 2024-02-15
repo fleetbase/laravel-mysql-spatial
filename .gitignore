@@ -3,3 +3,12 @@ vendor/
 composer.lock
 _db/
 build/
+.idea/*
+.idea/codeStyleSettings.xml
+server_vendor/
+.phpunit.result.cache
+.php_cs.cache
+.php-cs-fixer.cache
+*.swp
+*.swo
+.DS_Store
