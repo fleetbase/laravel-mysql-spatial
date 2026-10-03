@@ -1,7 +1,7 @@
 {
     "name": "fleetbase/laravel-mysql-spatial",
     "description": "MySQL spatial data types extension for Laravel x Fleetbase.",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "scripts": {
         "lint": "php-cs-fixer fix -v",
         "test": "phpunit -c phpunit.xml.dist",
