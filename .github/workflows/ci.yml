@@ -6,7 +6,7 @@ on:
     tags:
       - 'v*'
   pull_request:
-    branches: [ main ]
+    branches: [ main, 'release/v*', 'dev-v*' ]
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -30,6 +30,12 @@ jobs:
 
     - name: Validate composer.json and composer.lock
       run: composer validate
+
+    # laravel/laravel ^10 is a dev-only test harness. Composer 2.9+ refuses to install
+    # laravel/framework 10.x because of published advisories, which would block every
+    # install here; consumers of this package never install the dev dependencies.
+    - name: Allow the Laravel 10 test harness despite its advisories
+      run: composer config audit.block-insecure false
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
