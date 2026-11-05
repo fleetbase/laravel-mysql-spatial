@@ -2,16 +2,7 @@
 
 namespace Fleetbase\LaravelMysqlSpatial;
 
-use Doctrine\DBAL\Types\Type as DoctrineType;
 use Fleetbase\LaravelMysqlSpatial\Connectors\ConnectionFactory;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\Geometry;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\GeometryCollection;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\LineString;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\MultiLineString;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\MultiPoint;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\MultiPolygon;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\Point;
-use Fleetbase\LaravelMysqlSpatial\Doctrine\Polygon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\DatabaseServiceProvider;
 
@@ -45,25 +36,5 @@ class SpatialServiceProvider extends DatabaseServiceProvider
         $this->app->bind('db.schema', function ($app) {
             return $app['db']->connection()->getSchemaBuilder();
         });
-
-        if (class_exists(DoctrineType::class)) {
-            // Prevent geometry type fields from throwing a 'type not found' error when changing them
-            $geometries = [
-                'geometry'           => Geometry::class,
-                'point'              => Point::class,
-                'linestring'         => LineString::class,
-                'polygon'            => Polygon::class,
-                'multipoint'         => MultiPoint::class,
-                'multilinestring'    => MultiLineString::class,
-                'multipolygon'       => MultiPolygon::class,
-                'geometrycollection' => GeometryCollection::class,
-            ];
-            $typeNames = array_keys(DoctrineType::getTypesMap());
-            foreach ($geometries as $type => $class) {
-                if (!in_array($type, $typeNames)) {
-                    DoctrineType::addType($type, $class);
-                }
-            }
-        }
     }
 }

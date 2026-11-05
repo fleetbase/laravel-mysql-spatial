@@ -10,8 +10,8 @@ class BuilderTest extends \BaseTestCase
 {
     public function testReturnsCorrectBlueprint()
     {
-        $connection = \Mockery::mock(MysqlConnection::class);
-        $connection->shouldReceive('getSchemaGrammar')->once()->andReturn(null);
+        $connection = new MysqlConnection(new \Stubs\PDOStub(), 'database', '', ['database' => 'database', 'name' => 'foo']);
+        $connection->useDefaultSchemaGrammar();
 
         $mock = \Mockery::mock(Builder::class, [$connection]);
         $mock->makePartial()->shouldAllowMockingProtectedMethods();

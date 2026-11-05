@@ -1,17 +1,14 @@
-> v1.0.3 ~ "Building a connection no longer connects to MySQL"
+> v2.0.0 ~ "Laravel 12 and 13"
 
 ---
 ## Highlights
 
-- **Fix: resolving a connection no longer opens a database connection.** `MysqlConnection` registered its Doctrine geometry type mappings in the constructor through `getDoctrineSchemaManager()`, which resolved the PDO handle. Anything that merely resolved `DB::connection()` (`DB::listen()`, schema checks in service providers, `artisan package:discover` during `composer install`) connected to MySQL and failed when no database was reachable. The mappings are now registered on first Doctrine use.
-- **Release automation.** Release-branch tagging and GitHub Release publishing now match the other Fleetbase modules: merging a `release/v*` branch into `main` tags the release, and the tag publishes the GitHub Release from these notes.
+- **Requires Laravel 12 or 13, and PHP 8.2 or later.** Use the 1.x line on Laravel 10.
+- **Fatal errors on Laravel 11+ fixed.** `Blueprint::geometry()` and `Blueprint::spatialIndex()` now match the framework's signatures, and the `Blueprint` and `MySqlGrammar` constructors take a connection.
+- **`doctrine/dbal` removed**, along with `src/Doctrine` and the connection's Doctrine type mappings. Laravel 11 removed Doctrine support.
 
 ---
 ## Upgrading
-No changes required. Code that relied on the connection being established when the connection object was constructed should call `getPdo()` explicitly.
+Migrations don't need changing: `$table->geometry('col', 4326)` still reads an integer second argument as the SRID. `geometry('col', null, 4326)` also works, while a string subtype is accepted but ignored.
 
----
-## Need help?
-- [GitHub Discussions](https://github.com/fleetbase/fleetbase/discussions)
-- [Discord](https://discord.gg/HnTqQ6zAVn)
----
+Code calling `getDoctrineSchemaManager()` or `getDoctrineConnection()` on this connection must move to the `Schema` builder's `getColumns()`, `getIndexes()` and `getTables()`.

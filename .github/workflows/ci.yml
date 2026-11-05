@@ -12,6 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0-oracle
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_DATABASE: spatial_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -28,20 +42,20 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libzip-dev libgd-dev libfreetype6-dev libjpeg-dev libpng-dev imagemagick libmagickwand-dev libmemcached-dev libgeos-dev libgmp-dev default-mysql-client libicu-dev
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
-
-    # laravel/laravel ^10 is a dev-only test harness. Composer 2.9+ refuses to install
-    # laravel/framework 10.x because of published advisories, which would block every
-    # install here; consumers of this package never install the dev dependencies.
-    - name: Allow the Laravel 10 test harness despite its advisories
-      run: composer config audit.block-insecure false
+    - name: Validate composer.json
+      run: composer validate --no-check-lock
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      run: composer update --prefer-dist --no-progress --no-interaction
 
     - name: Run Lint
-      run: composer lint
+      run: composer test:lint
 
-    # - name: Run Tests -- Will add tests back after phppest issue https://github.com/pestphp/pest/issues/920 is fixed
-    #   run: composer test:unit
+    - name: Run unit and integration tests against MySQL
+      run: vendor/bin/phpunit -c phpunit.xml.dist --no-coverage
+      env:
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_DATABASE: spatial_test
+        DB_USERNAME: root
+        DB_PASSWORD: ""

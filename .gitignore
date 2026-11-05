@@ -12,3 +12,4 @@ server_vendor/
 *.swp
 *.swo
 .DS_Store
+.phpunit.cache/

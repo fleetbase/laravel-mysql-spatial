@@ -9,13 +9,22 @@ class Blueprint extends IlluminateBlueprint
     /**
      * Add a geometry column on the table.
      *
-     * @param string   $column
-     * @param int|null $srid
+     * The framework's signature is ($column, $subtype, $srid), but this package's own is
+     * ($column, $srid). An integer second argument is still read as the SRID so existing
+     * migrations keep their meaning.
+     *
+     * @param string          $column
+     * @param string|int|null $subtype
+     * @param int|null        $srid
      *
      * @return \Illuminate\Support\Fluent
      */
-    public function geometry($column, $srid = null)
+    public function geometry($column, $subtype = null, $srid = null)
     {
+        if (is_int($subtype)) {
+            $srid = $subtype;
+        }
+
         return $this->addColumn('geometry', $column, compact('srid'));
     }
 
@@ -115,10 +124,11 @@ class Blueprint extends IlluminateBlueprint
      *
      * @param string|array $columns
      * @param string       $name
+     * @param string|null  $operatorClass unused on MySQL
      *
      * @return \Illuminate\Support\Fluent
      */
-    public function spatialIndex($columns, $name = null)
+    public function spatialIndex($columns, $name = null, $operatorClass = null)
     {
         return $this->indexCommand('spatial', $columns, $name);
     }
