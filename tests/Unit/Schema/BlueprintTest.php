@@ -191,6 +191,32 @@ class BlueprintTest extends \BaseTestCase
         $this->assertSame($expectedCol, $result);
     }
 
+    public function testGeometryReadsAnIntegerSecondArgumentAsTheSrid()
+    {
+        $expectedCol = new ColumnDefinition(['type' => 'geometry', 'name' => 'col', 'srid' => 4326]);
+
+        $this->blueprint
+            ->shouldReceive('addColumn')
+            ->with('geometry', 'col', ['srid' => 4326])
+            ->once()
+            ->andReturn($expectedCol);
+
+        $this->assertSame($expectedCol, $this->blueprint->geometry('col', 4326));
+    }
+
+    public function testGeometryAcceptsTheFrameworkSignature()
+    {
+        $expectedCol = new ColumnDefinition(['type' => 'geometry', 'name' => 'col', 'srid' => 3857]);
+
+        $this->blueprint
+            ->shouldReceive('addColumn')
+            ->with('geometry', 'col', ['srid' => 3857])
+            ->once()
+            ->andReturn($expectedCol);
+
+        $this->assertSame($expectedCol, $this->blueprint->geometry('col', null, 3857));
+    }
+
     public function testPointWithSrid()
     {
         $expectedCol = new ColumnDefinition([

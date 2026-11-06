@@ -20,7 +20,7 @@ abstract class PointCollection extends GeometryCollection
         }, $this->items));
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->validateItemType($value);
 
@@ -28,7 +28,7 @@ abstract class PointCollection extends GeometryCollection
     }
 
     /**
-     * @return array|\Fleetbase\LaravelMysqlSpatial\Types\Point[]
+     * @return array|Point[]
      */
     public function getPoints()
     {
