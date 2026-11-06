@@ -3,6 +3,7 @@
 namespace Fleetbase\LaravelMysqlSpatial\Schema\Grammars;
 
 use Fleetbase\LaravelMysqlSpatial\Schema\Blueprint;
+use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Grammars\MySqlGrammar as IlluminateMySqlGrammar;
 use Illuminate\Support\Fluent;
 
@@ -10,8 +11,10 @@ class MySqlGrammar extends IlluminateMySqlGrammar
 {
     public const COLUMN_MODIFIER_SRID = 'Srid';
 
-    public function __construct()
+    public function __construct(Connection $connection)
     {
+        parent::__construct($connection);
+
         // Enable SRID as a column modifier
         if (!in_array(self::COLUMN_MODIFIER_SRID, $this->modifiers)) {
             $this->modifiers[] = self::COLUMN_MODIFIER_SRID;

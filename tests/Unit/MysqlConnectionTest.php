@@ -9,10 +9,7 @@ class MysqlConnectionTest extends TestCase
 {
     private $mysqlConnection;
 
-    /**
-     * `server_version` lets Doctrine pick the platform without querying the (stub) PDO handle.
-     */
-    private $mysqlConfig = ['driver' => 'mysql', 'prefix' => 'prefix', 'database' => 'database', 'name' => 'foo', 'server_version' => '8.0.30'];
+    private $mysqlConfig = ['driver' => 'mysql', 'prefix' => 'prefix', 'database' => 'database', 'name' => 'foo'];
 
     protected function setUp(): void
     {
@@ -41,30 +38,6 @@ class MysqlConnectionTest extends TestCase
 
         $connection->getPdo();
 
-        $this->assertSame(1, $resolved);
-    }
-
-    public function testGeometryTypeMappingsAreRegisteredOnFirstDoctrineUse()
-    {
-        $resolved = 0;
-        $resolver = function () use (&$resolved) {
-            $resolved++;
-
-            return new PDOStub();
-        };
-
-        $connection = new MysqlConnection($resolver, 'database', 'prefix', $this->mysqlConfig);
-        $platform   = $connection->getDoctrineSchemaManager()->getDatabasePlatform();
-
-        $this->assertSame(1, $resolved);
-
-        foreach (['geometry', 'point', 'linestring', 'polygon', 'multipoint', 'multilinestring', 'multipolygon', 'geometrycollection', 'geomcollection'] as $type) {
-            $this->assertTrue($platform->hasDoctrineTypeMappingFor($type), "Expected a Doctrine type mapping for {$type}.");
-            $this->assertSame('string', $platform->getDoctrineTypeMapping($type));
-        }
-
-        // repeated access reuses the same Doctrine connection and does not re-register
-        $this->assertSame($connection->getDoctrineConnection(), $connection->getDoctrineConnection());
         $this->assertSame(1, $resolved);
     }
 }

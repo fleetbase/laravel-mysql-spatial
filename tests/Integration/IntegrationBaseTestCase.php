@@ -2,6 +2,7 @@
 
 use Fleetbase\LaravelMysqlSpatial\SpatialServiceProvider;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Facade;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
 abstract class IntegrationBaseTestCase extends BaseTestCase
@@ -17,9 +18,12 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
     public function createApplication()
     {
         $app = require __DIR__ . '/../../vendor/laravel/laravel/bootstrap/app.php';
-        $app->register(SpatialServiceProvider::class);
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+
+        // After bootstrap, or the framework's DatabaseServiceProvider rebinds `db` over this one.
+        $app->register(SpatialServiceProvider::class);
+        Facade::clearResolvedInstances();
 
         $app['config']->set('database.default', 'mysql');
         $app['config']->set('database.connections.mysql.host', env('DB_HOST'));
@@ -41,8 +45,6 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
 
     /**
      * Setup DB before each test.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -71,7 +73,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
     // MySQL 8.0.4 fixed bug #26941370 and bug #88031
     private function isMySQL8AfterFix()
     {
-        $results       = DB::select(DB::raw('select version()'));
+        $results       = DB::select('select version()');
         $mysql_version = $results[0]->{'version()'};
 
         return version_compare($mysql_version, '8.0.4', '>=');
